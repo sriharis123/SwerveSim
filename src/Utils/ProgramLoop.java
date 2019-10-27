@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class ProgramLoop implements Runnable {
 
     private static boolean record = true;
-    private static String filename = "simulation.csv";
+    private static String filename = "example_sim.csv";
     private static SessionRecorder recorder;
     private static double timeStep = 0.020;
 
