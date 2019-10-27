@@ -24,7 +24,6 @@ public class ProgramLoop implements Runnable {
 
     public static void init() {
         u = new ProgramLoop();
-        recorder = new SessionRecorder(filename);
         t = new Thread(u);
         t.setDaemon(true);
         t.start();
@@ -49,10 +48,14 @@ public class ProgramLoop implements Runnable {
             Display.updateStage();
             Display.getBot().updateBot();
 
-            ArrayList<Number> numbers = new ArrayList<>();
-
-            recorder.append(Arrays.asList(Display.getBot().getHeading(), Display.getBot().getPosX(), Display.getBot().getPosY(),
-                    Display.getBot().getCurrentThetaVel(), Display.getBot().getCurrentVelocityX(), Display.getBot().getCurrentVelocityY()));
+            if (record) {
+                if (recorder == null) {
+                    recorder = new SessionRecorder(filename);
+                }
+                ArrayList<Number> numbers = new ArrayList<>();
+                recorder.append(Arrays.asList(Display.getBot().getHeading(), Display.getBot().getPosX(), Display.getBot().getPosY(),
+                        Display.getBot().getCurrentThetaVel(), Display.getBot().getCurrentVelocityX(), Display.getBot().getCurrentVelocityY()));
+            }
 
             try {
                 Thread.sleep((int)(timeStep * 1000));
